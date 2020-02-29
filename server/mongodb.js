@@ -5,7 +5,7 @@
      */
     module.exports = async () => {
         const client = await MongoClient.connect(process.env.MONGO_URL || 'mongodb://localhost:27017'),
-            db = client.db('cricketPlayers');
+            db = client.db('cricketplayers');
             db.collection('players').createIndex( { ['NAME']: "text" } );
         return db;
     }
