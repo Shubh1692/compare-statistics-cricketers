@@ -13,4 +13,4 @@ Runs the backend app.<br />
 Open [http://localhost:3001](http://localhost:3001) to view it in the browser.
 
 ### `deployed url`
-`https://video-streaming-app-shubham.herokuapp.com/`
+`https://compare-statistics-cricketers.herokuapp.com/`
