@@ -1,0 +1,17 @@
+
+
+.dropdown-group {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+
+@media (max-width: 600px) {
+  .App {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column-reverse;
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "name": "compare-statistics-cricketers-app",
+  "version": "0.1.0",
+  "private": true,
+  "author": "Shubham Vijay Vargiy",
+  "engines": {
+    "node": "10.16.3",
+    "npm": "6.9.0"
+  },
+  "dependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.4.1",
+    "@testing-library/user-event": "^7.2.1",
+    "bootstrap": "^4.4.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongodb": "^3.5.4",
+    "path": "^0.12.7",
+    "react": "^16.13.0",
+    "react-bootstrap": "^1.0.0-beta.16",
+    "react-dom": "^16.13.0",
+    "react-scripts": "3.4.0",
+    "react-select": "^3.0.8"
+  },
+  "scripts": {
+    "postinstall": "npm run build",
+    "start": "node server/index.js",
+    "dev": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "index.js",
+  "license": "ISC"
+}
