@@ -7,7 +7,7 @@ import { Container } from 'react-bootstrap';
 import './App.css';
 
 const client = new ApolloClient({
-  uri: "http://localhost:3001/graphql"
+  uri: "/graphql"
 });
 function App() {
   return (<ApolloProvider client={client}>
