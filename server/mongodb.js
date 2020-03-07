@@ -1,13 +1,13 @@
 (function () {
-    const { MongoClient } = require('mongodb');
+    const { connect } = require('mongoose');
     /**
      * This is used for connect mongo database
      */
     module.exports = async () => {
-        const client = await MongoClient.connect(process.env.MONGO_URL || 'mongodb://localhost:27017'),
-            db = client.db('cricketplayers');
-            db.collection('players').createIndex( { ['NAME']: "text" } );
-        return db;
+        await connect(process.env.MONGO_URL || 'mongodb://localhost:27017/cricketPlayers', {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+        });
     }
 }())
 

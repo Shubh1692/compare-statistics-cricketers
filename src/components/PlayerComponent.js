@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import AsyncSelect from 'react-select/async';
 import { Button, ListGroup } from 'react-bootstrap';
+import gql from "graphql-tag";
 export default class PlayerComponent extends Component {
   state = { inputValue: '', players: {}, compareData: [] };
   /**
@@ -8,9 +9,22 @@ export default class PlayerComponent extends Component {
    * This is used for load dropdown options based on filter string
    */
   loadOptions = async (search) => {
-    const playerDropdownReq = await fetch(`api/players?search=${search}`);
-    const { players } = await playerDropdownReq.json();
-    return players;
+    search = search || "";
+    const {client} = this.props;
+    const res = await client.query({
+      query: gql`
+          query {
+            players(search: "${search}") {
+              label
+              value
+            }
+          }
+        `
+    });
+    if (res.data && res.data.players) {
+      return res.data.players;
+    }
+    return [];
   }
 
   /**
@@ -36,11 +50,31 @@ export default class PlayerComponent extends Component {
    */
   onCompare = async () => {
     const { players } = this.state;
-    const playerCompareReq = await fetch(`api/compare/${Object.values(players).join(',')}`);
-    const { compareData } = await playerCompareReq.json();
-    await this.setState({
-      compareData
+    console.log(players)
+    const {client} = this.props;
+    const res = await client.query({
+      query: gql`
+          query comparePlayers($players: [String]){
+            comparePlayers(players: $players) {
+              fieldName
+              playerDataArray
+              displayName
+            }
+          }
+        `,
+        variables: {
+          players: Object.values(players)
+        }
     });
+    if (res.data && res.data.comparePlayers) {
+      await this.setState({
+        compareData: res.data.comparePlayers
+      });
+    } else {
+      await this.setState({
+        compareData: []
+      });
+    }
   }
 
   /**
@@ -49,6 +83,7 @@ export default class PlayerComponent extends Component {
   */
   render() {
     const { players = {}, compareData } = this.state;
+    console.log(this.props)
     return (
       <Fragment>
         <div className="d-flex align-items-center">
@@ -62,7 +97,6 @@ export default class PlayerComponent extends Component {
             />
             <AsyncSelect className="player-dropdown w-50 pl-5"
               cacheOptions
-              onChange={this.handleChange}
               loadOptions={this.loadOptions}
               onChange={(value) => this.handleChange('playerTwo', value)}
               defaultOptions
